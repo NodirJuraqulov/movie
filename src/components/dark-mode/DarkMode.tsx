@@ -8,7 +8,6 @@ const DarkMode: React.FC = () => {
   const getInitial = () => {
     const saved = localStorage.getItem(KEY);
     if (saved === "dark" || saved === "light") return saved === "dark";
-    // Agar saqlanmagan bo‘lsa, tizim rejimini tekshir
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   };
 

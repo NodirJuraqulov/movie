@@ -1,19 +1,14 @@
 import React from "react";
 import { Select } from "antd";
 
-/** Qo'llab-quvvatlanadigan tillar kodi */
 export type Lang = "uz" | "ru" | "en";
 
 interface LanguageSelectProps {
-  /** Tanlangan til */
   value: Lang;
-  /** Til o'zgarganda chaqiriladigan callback */
   onChange: (lang: Lang) => void;
-  /** Ant Design hajmi */
   size?: "small" | "middle" | "large";
 }
 
-/** Bayroq URL‑lari */
 const FLAGS: Record<Lang, string> = {
   uz: "https://flagcdn.com/w20/uz.png",
   ru: "https://flagcdn.com/w20/ru.png",
@@ -40,7 +35,6 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ value, onChange, size =
       onChange={onChange as (val: string) => void}
       options={options}
       size={size}
-    //   dropdownMatchSelectWidth={false}
       className="min-w-[72px] rounded-[12px]"
     />
   );

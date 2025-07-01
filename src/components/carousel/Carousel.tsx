@@ -3,13 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperClass } from "swiper";
 
-// Import Swiper styles
+import "./styles.css";
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-
-import "./styles.css";
 
 const Carousel = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
@@ -41,8 +40,8 @@ const Carousel = () => {
         navigation={true}
         speed={1500} 
         autoplay={{
-          delay: 3000, // ⏱️  3 soniya
-          disableOnInteraction: false, // foydalanuvchi bosganda to‘xtab qolmasin
+          delay: 3000,
+          disableOnInteraction: false
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="mySwiper2 mt-2"
@@ -74,8 +73,8 @@ const Carousel = () => {
           slideToClickedSlide={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper mb-[50px] mx-auto"
-          style={{ width: "556px" }}
+          className="mySwiper mb-[50px] mx-auto mt-4"
+          style={{ width: "556px"}}
         >
           <SwiperSlide
             style={{ borderRadius: "12px", width: "108px", height: "64px" }}

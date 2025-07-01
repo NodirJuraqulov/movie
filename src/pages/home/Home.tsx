@@ -9,6 +9,7 @@ const Home = () => {
   return (
     <div>
       <Carousel/>
+      
       <MovieView data={data?.results?.slice(0, 8)}/>
     </div>
   )
