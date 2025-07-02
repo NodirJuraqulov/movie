@@ -1,6 +1,6 @@
+import React, { type FC } from "react";
 import { IMAGE_URL } from "@/const";
 import type { IMovie } from "@/types";
-import React, { type FC } from "react";
 import { Rate } from 'antd';
 
 interface Props {

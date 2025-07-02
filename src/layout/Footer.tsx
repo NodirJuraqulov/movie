@@ -17,10 +17,10 @@ import YouTube from "@/assets/youtube.svg";
 const Footer = () => {
   return (
     <footer className="w-full mt-[120px] pb-10">
-      <div className="container rounded-[12px] dark:bg-[#111111] bg-slate-200 min-h-[240px] p-[30px]">
-        <div className="px-[20px] flex justify-between">
-          <div>
-            <img src={Logo} alt="Logo" className="mb-12" />
+      <div className="container rounded-[12px] dark:bg-[#111111] bg-slate-200 min-h-[240px] p-[30px] flex justify-center">
+        <div className="px-[20px] grid lg:grid-cols-4 md:grid-cols-2 md:gap-12 grid-cols-1 gap-6">
+          <div className="flex flex-col items-start">
+            <img src={Logo} alt="Logo" className="mb-12 w-[55px]" />
 
             <div className="flex flex-col items-center justify-center gap-2">
               <button className="cursor-pointer">

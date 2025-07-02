@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, type FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperClass } from "swiper";
+import type { IMovie } from "@/types";
 
 import "./styles.css";
 
@@ -9,23 +10,28 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { IMAGE_URL } from "@/const";
 
-const Carousel = () => {
+interface Props {
+  data: undefined | IMovie[];
+}
+
+const Carousel: FC<Props> = ({ data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [mainSwiper, setMainSwiper] = useState<SwiperClass | null>(null);
 
   useEffect(() => {
-  if (mainSwiper && thumbsSwiper && !thumbsSwiper.destroyed) {
-    mainSwiper.thumbs.swiper = thumbsSwiper;
-    mainSwiper.thumbs.init && mainSwiper.thumbs.init();
-    mainSwiper.thumbs.update(true);
-  }
-}, [mainSwiper, thumbsSwiper]);
+    if (mainSwiper && thumbsSwiper && !thumbsSwiper.destroyed) {
+      mainSwiper.thumbs.swiper = thumbsSwiper;
+      mainSwiper.thumbs.init && mainSwiper.thumbs.init();
+      mainSwiper.thumbs.update(true);
+    }
+  }, [mainSwiper, thumbsSwiper]);
 
   return (
     <>
       <Swiper
-        onSwiper={setMainSwiper}  
+        onSwiper={setMainSwiper}
         style={
           {
             "--swiper-navigation-color": "#fff",
@@ -38,29 +44,22 @@ const Carousel = () => {
         loop={false}
         spaceBetween={4}
         navigation={true}
-        speed={1500} 
+        speed={1500}
         autoplay={{
           delay: 3000,
-          disableOnInteraction: false
+          disableOnInteraction: false,
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-        className="mySwiper2 mt-2"
+        className="mySwiper2 mt-2 relative"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
+        {(data ?? []).slice(0, 5).map((m, i) => (
+          <SwiperSlide key={i}>
+            <img src={IMAGE_URL + m.backdrop_path} />
+            <h2 className="absolute bottom-20 left-1/2 -translate-x-1/2 text-8xl text-slate-200">
+              "{m.title}"
+            </h2>
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <div className="w-full flex justify-center">
@@ -74,58 +73,22 @@ const Carousel = () => {
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper mb-[50px] mx-auto mt-4"
-          style={{ width: "556px"}}
+          style={{ width: "556px" }}
         >
-          <SwiperSlide
-            style={{ borderRadius: "12px", width: "108px", height: "64px" }}
-            className="w-[108px]"
-          >
-            <img
-              className="w-full h-full object-cover"
-              style={{ borderRadius: "12px" }}
-              src="https://swiperjs.com/demos/images/nature-1.jpg"
-            />
-          </SwiperSlide>
-          <SwiperSlide
-            style={{ borderRadius: "12px", width: "108px", height: "64px" }}
-            className="w-[108px]"
-          >
-            <img
-              className="w-full h-full object-cover"
-              style={{ borderRadius: "12px" }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
-            />
-          </SwiperSlide>
-          <SwiperSlide
-            style={{ borderRadius: "12px", width: "108px", height: "64px" }}
-            className="w-[108px]"
-          >
-            <img
-              className="w-full h-full object-cover"
-              style={{ borderRadius: "12px" }}
-              src="https://swiperjs.com/demos/images/nature-3.jpg"
-            />
-          </SwiperSlide>
-          <SwiperSlide
-            style={{ borderRadius: "12px", width: "108px", height: "64px" }}
-            className="w-[108px]"
-          >
-            <img
-              className="w-full h-full object-cover"
-              style={{ borderRadius: "12px" }}
-              src="https://swiperjs.com/demos/images/nature-4.jpg"
-            />
-          </SwiperSlide>
-          <SwiperSlide
-            style={{ borderRadius: "12px", width: "108px", height: "64px" }}
-            className="w-[108px]"
-          >
-            <img
-              className="w-full h-full object-cover"
-              style={{ borderRadius: "12px" }}
-              src="https://swiperjs.com/demos/images/nature-5.jpg"
-            />
-          </SwiperSlide>
+          {(data ?? []).slice(0, 5).map((m, i) => (
+            <SwiperSlide
+              key={m.id ?? i} // har doim `key` bering
+              style={{ borderRadius: "12px", width: "108px", height: "64px" }}
+              className="w-[108px]"
+            >
+              <img
+                className="w-full h-full object-cover"
+                style={{ borderRadius: "12px" }}
+                src={IMAGE_URL + m.backdrop_path}
+                alt={m.title}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </>

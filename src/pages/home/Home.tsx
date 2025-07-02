@@ -8,7 +8,7 @@ const Home = () => {
   const {data} = getMovies({page: 1, without_genres: "18,36,27,10749"})
   return (
     <div>
-      <Carousel/>
+      <Carousel data={data?.results?.slice(0, 5)}/>
       
       <MovieView data={data?.results?.slice(0, 8)}/>
     </div>

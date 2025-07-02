@@ -4,6 +4,7 @@ import MainLogo from "@/assets/main-logo.svg";
 import DarkMode from "@/components/dark-mode/DarkMode";
 import LanguageSelect from "@/components/language/Language";
 import type { Lang } from "@/components/language/Language";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import {
   HomeOutlined,
   VideoCameraOutlined,
@@ -23,6 +24,8 @@ const navLinks = [
 
 const Header = () => {
   const [lang, setLang] = useState<Lang>("uz");
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [shrink, setShrink] = useState(false);
 
@@ -47,13 +50,15 @@ const Header = () => {
           </NavLink>
         </div>
 
-        <div className="flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map(({ to, label, icon }) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) =>
-                `${linkBase} ${isActive ? "text-[#C61F1F]" : "dark:text-white text-black"}`
+                `${linkBase} ${
+                  isActive ? "text-[#C61F1F]" : "dark:text-white text-black"
+                }`
               }
             >
               {icon}
@@ -62,13 +67,56 @@ const Header = () => {
           ))}
         </div>
 
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="md:hidden p-2 rounded hover:bg-slate-200 dark:hover:bg-gray-900"
+          aria-label="Open menu"
+        >
+          <MenuOutlined style={{fontSize: "22px"}} />
+        </button>
+
         <div className="flex items-center gap-5">
-          <button className="text-[16px] font-medium cursor-pointer text-white bg-[#C61F1F] px-4 py-1 rounded-[6px]">
+          <button className="text-[16px] font-medium cursor-pointer line-clamp-1 text-white bg-[#C61F1F] lg:px-4 md:px-3 sm:px-2 px-1 py-1 rounded-[6px]">
             Sign in
           </button>
           <DarkMode />
           <LanguageSelect value={lang} onChange={setLang} />
         </div>
+      </div>
+
+      <div>
+        {menuOpen && (
+          <div
+            className="fixed inset-0 bg-black/20 z-50"
+            onClick={() => setMenuOpen(false)}
+          >
+            <div
+              className="absolute left-1/2 -translate-x-1/2 top-[70px] w-56 bg-slate-200 dark:bg-[#111111] rounded-lg shadow-lg p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="absolute top-3 right-3 p-1"
+                aria-label="Close menu"
+              >
+                <CloseOutlined size={24} />
+              </button>
+
+              <nav className="flex flex-col gap-4 mt-6 text-center">
+                {["Home", "Movies", "Saved", "Search"].map((t) => (
+                  <NavLink
+                    key={t}
+                    to={t === "Home" ? "/" : `/${t.toLowerCase()}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-lg font-medium rounded-md py-1 text-black dark:text-white hover:text-[#C61F1F] hover:bg-slate-300 dark:hover:bg-gray-900 transition"
+                  >
+                    {t}
+                  </NavLink>
+                ))}
+              </nav>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
