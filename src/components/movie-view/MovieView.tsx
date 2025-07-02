@@ -18,7 +18,7 @@ const MovieView: FC<Props> = ({ data }) => {
               loading="lazy"
               src={movie.poster_path ? IMAGE_URL + movie.poster_path : NoImg}
               alt={movie.title}
-              className="rounded-t-lg hover:scale-102 object-contain cursor-pointer h-[524px]"
+              className="rounded-t-lg hover:scale-102 object-contain cursor-pointer"
             />
             <p className="absolute top-2 left-2 text-white bg-red-500 px-2 rounded text-sm">{movie.release_date.split("-")[0]}</p>
           </div>
