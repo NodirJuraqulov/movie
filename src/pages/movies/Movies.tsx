@@ -5,7 +5,7 @@ import { Pagination } from "antd";
 import { useGenre } from "@/api/hooks/useGenre";
 import Genre from "@/components/genre/Genre";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useParamsHook } from "@/components/hooks/useParamsHook";
+import { useParamsHook } from "@/hooks/useParamsHook";
 
 const Movies = () => {
   const { getMovies } = useMovie();

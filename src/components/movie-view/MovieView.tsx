@@ -3,12 +3,15 @@ import { IMAGE_URL } from "@/const";
 import type { IMovie } from "@/types";
 import { Rate } from 'antd';
 import NoImg from "@/assets/noimage.png"
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: undefined | IMovie[];
 }
 
 const MovieView: FC<Props> = ({ data }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="container mx-auto grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5">
       {data?.map((movie: IMovie) => (
@@ -16,6 +19,7 @@ const MovieView: FC<Props> = ({ data }) => {
           <div className="relative overflow-hidden">
             <img
               loading="lazy"
+              onClick={()=> navigate(`/movie/${movie.id}`)}
               src={movie.poster_path ? IMAGE_URL + movie.poster_path : NoImg}
               alt={movie.title}
               className="rounded-t-lg hover:scale-102 object-contain cursor-pointer"

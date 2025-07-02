@@ -1,6 +1,6 @@
 import type { IGenre } from "@/types";
 import React, { type FC } from "react";
-import { useParamsHook } from "../hooks/useParamsHook";
+import { useParamsHook } from "../../hooks/useParamsHook";
 
 interface Props {
   data: undefined | IGenre[];
