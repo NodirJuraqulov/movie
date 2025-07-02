@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/scrollToTop/ScrollToTop";
 import Footer from "@/layout/Footer";
 import Header from "@/layout/Header";
 import React from "react";
@@ -11,6 +12,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };
