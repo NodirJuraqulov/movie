@@ -5,31 +5,30 @@ import { Pagination } from "antd";
 import { useGenre } from "@/api/hooks/useGenre";
 import Genre from "@/components/genre/Genre";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useSearchParams } from "react-router-dom";
+import { useParamsHook } from "@/components/hooks/useParamsHook";
 
 const Movies = () => {
   const { getMovies } = useMovie();
   const { getGenres } = useGenre();
+  const { getParam, setParam } = useParamsHook();
 
-  const [params, setParams] = useSearchParams();
+  const genre = getParam("genre");
 
-  const page: number = parseInt(params.get("page") ?? "1", 10);                
-  const pageSize: number = parseInt(params.get("pageSize") ?? "20", 10);       
+  const page = Number(getParam("page")) || 1;
 
-  const { data: genreData } = getGenres();
-  const { data } = getMovies({limit: pageSize, skip: pageSize * (page - 1), without_genres: "18,36,27,10749" });
-
-  const handleChangePage = (page: number , pageS: number) => {   
-    if (pageS !== pageSize) {
-      params.set("pageSize", pageS.toString());
-      params.set("page", "1");
-    } else {
-      params.set("page", page.toString());
-    }
-    setParams(params);
-
+  const handleChangePage = (value: number) => {
+    setParam("page", value.toString());
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const { data: genreData } = getGenres();
+  const { data } = getMovies({
+    page,
+    with_genres: genre,
+    without_genres: "18,36,27,10749",
+    // "release_date.gte": "01-01-1800",
+    // "release_date.lte": "01-01-1890",
+  });
 
   return (
     <div>
@@ -41,8 +40,8 @@ const Movies = () => {
         <Pagination
           current={page}
           onChange={handleChangePage}
-          pageSize={pageSize}
-          total={data?.total_results ?? 0}
+          pageSize={20}
+          total={data?.total_results <= 10_000 ? data?.total_results : 10_000}
           showSizeChanger={false}
           prevIcon={
             <LeftOutlined className="text-black dark:bg-white p-2 rounded-md" />
