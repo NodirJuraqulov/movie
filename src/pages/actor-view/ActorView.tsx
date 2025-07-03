@@ -16,7 +16,7 @@ const ActorView = () => {
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center gap-15 mt-8">
-      <div className="w-full max-w-4xl mx-auto rounded-lg shadow dark:shadow-gray-700 bg-white/90 dark:bg-[#111]/90 backdrop-blur p-6 space-y-6">
+      <div className="w-full max-w-4xl mx-auto rounded-lg shadow dark:shadow-gray-700 bg-slate-200 dark:bg-[#111]/90 backdrop-blur p-6 space-y-6">
         {/* Name + popularity */}
         <div className="flex items-start justify-between gap-4">
           <h1 className="text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100">
