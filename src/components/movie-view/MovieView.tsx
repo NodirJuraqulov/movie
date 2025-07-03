@@ -4,6 +4,8 @@ import type { IMovie } from "@/types";
 import { Rate } from 'antd';
 import NoImg from "@/assets/noimage.png"
 import { useNavigate } from "react-router-dom";
+import SavedLine from "@/assets/bookmark-line.svg";
+// import SavedFill from "@/assets/bookmark-fill.svg";
 
 interface Props {
   data: undefined | IMovie[];
@@ -24,7 +26,8 @@ const MovieView: FC<Props> = ({ data }) => {
               alt={movie.title}
               className="rounded-t-lg hover:scale-102 object-contain cursor-pointer"
             />
-            <p className="absolute top-2 left-2 text-white bg-red-500 px-2 rounded text-sm">{movie.release_date.split("-")[0]}</p>
+            <p className="absolute top-2 left-2 text-white bg-red-600 px-2 rounded text-sm">{movie.release_date.split("-")[0]}</p>
+            <img src={SavedLine} alt="Saved" className="absolute top-2 right-2 p-[6px] cursor-pointer bg-[#111111] rounded" />
           </div>
           <div className="p-2">
             <h3

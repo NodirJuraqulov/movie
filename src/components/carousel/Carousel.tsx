@@ -55,9 +55,12 @@ const Carousel: FC<Props> = ({ data }) => {
         {(data ?? []).slice(0, 5).map((m, i) => (
           <SwiperSlide key={i}>
             <img src={IMAGE_URL + m.backdrop_path} />
-            <h2 className="absolute bottom-20 left-1/2 -translate-x-1/2 text-8xl text-slate-200">
-              "{m.title}"
-            </h2>
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+              <h2 className="text-8xl text-slate-200">
+                "{m.title}"
+              </h2>
+
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
