@@ -1,6 +1,6 @@
 import { useMovie } from "@/api/hooks/useMovie";
 import { IMAGE_URL } from "@/const";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Image } from "antd";
 import MovieView from "@/components/movie-view/MovieView";
 
@@ -14,6 +14,8 @@ const MovieDetail = () => {
   const { data: creditsData } = getMovieDetail(id || "", "credits");    // kinodagi aktyorlar;
 
   console.log(creditsData?.cast);
+
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -32,7 +34,7 @@ const MovieDetail = () => {
       <div className="flex gap-3 flex-wrap overflow-auto">
         {creditsData?.cast?.map((person: any) => (
             <div key={person?.id}>
-                <img width={150} src={IMAGE_URL+person?.profile_path} alt="" />
+                <img onClick={() => navigate(`/person/${person.id}`)} width={150} src={IMAGE_URL+person?.profile_path} alt="" className="cursor-pointer" />
                 <h3>{person?.original_name}</h3>
                 <p>{person?.character}</p>
             </div>

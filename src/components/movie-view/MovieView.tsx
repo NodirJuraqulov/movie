@@ -15,7 +15,7 @@ const MovieView: FC<Props> = ({ data }) => {
   return (
     <div className="container mx-auto grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5">
       {data?.map((movie: IMovie) => (
-        <div className="dark:bg-[#111111] bg-slate-200 rounded-lg" key={movie.id}>
+        <div className="dark:bg-[#111111] bg-slate-200 shadow rounded-lg" key={movie.id}>
           <div className="relative overflow-hidden">
             <img
               loading="lazy"
@@ -33,7 +33,11 @@ const MovieView: FC<Props> = ({ data }) => {
             >
               {movie.title}
             </h3>
-            <Rate allowHalf defaultValue={movie.vote_average / 2} />
+
+            <div className="flex items-center justify-between">
+              <p className="text-gray-500 font-medium">Rating: {movie.vote_average}</p>
+              <Rate allowHalf defaultValue={movie.vote_average / 2} />
+            </div>
           </div>
         </div>
       ))}
