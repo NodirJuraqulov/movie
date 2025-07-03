@@ -1,3 +1,4 @@
+import NetworkStatus from "@/components/network-status/NetworkStatus";
 import ScrollToTop from "@/components/scrollToTop/ScrollToTop";
 import Footer from "@/layout/Footer";
 import Header from "@/layout/Header";
@@ -7,6 +8,7 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <>
+      <NetworkStatus />
       <Header />
       <main className="pt-20">
         <Outlet />
