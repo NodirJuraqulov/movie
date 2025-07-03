@@ -11,6 +11,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { IMAGE_URL } from "@/const";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: undefined | IMovie[];
@@ -27,6 +28,8 @@ const Carousel: FC<Props> = ({ data }) => {
       mainSwiper.thumbs.update(true);
     }
   }, [mainSwiper, thumbsSwiper]);
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -54,12 +57,21 @@ const Carousel: FC<Props> = ({ data }) => {
       >
         {(data ?? []).slice(0, 5).map((m, i) => (
           <SwiperSlide key={i}>
-            <img src={IMAGE_URL + m.backdrop_path} />
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
-              <h2 className="text-8xl text-slate-200">
+            <img src={IMAGE_URL + m.backdrop_path} onClick={() => navigate(`/movie/${m.id}`)} />
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2">
+              <h2 className="text-[32px] leading-[40px] font-medium text-white mb-4">
                 "{m.title}"
               </h2>
 
+              <div className="flex items-center justify-center gap-2 text-white">
+                <p>{m.release_date.split("-")[0]}</p>
+                <p>•</p>
+                <p>{m.genre_ids[0]}</p>
+                <p>•</p>
+                <p>{m.original_language.toUpperCase()}</p>
+                <p>•</p>
+                <p>{m.vote_average}</p>
+              </div>
             </div>
           </SwiperSlide>
         ))}

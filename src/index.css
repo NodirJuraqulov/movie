@@ -11,18 +11,26 @@
   margin-right: auto;
 }
 
-
 @layer utilities {
   .tw-input input::placeholder {
-    color: #4D4D4D !important;
+    color: #4d4d4d !important;
     font-size: 16px;
     line-height: 20px;
     font-weight: 500;
   }
   .dark .tw-input input::placeholder {
-    color: #4D4D4D !important;        
+    color: #4d4d4d !important;
   }
   .dark .tw-input input {
-    color: #fff !important;           /* yozilgan matn oq bo‘ladi */
+    color: #fff !important; /* yozilgan matn oq bo‘ladi */
   }
+}
+
+/* Scroll barʼni to'liq yashiradigan utilita */
+.scroll-hidden {
+  -ms-overflow-style: none; /* IE, eski Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
