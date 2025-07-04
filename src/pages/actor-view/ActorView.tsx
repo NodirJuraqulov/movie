@@ -119,7 +119,7 @@ const ActorView = () => {
           Movies they appeared in
         </h2>
 
-        <MovieView data={movieData?.cast?.slice(0, 4)} />
+        <MovieView data={movieData?.cast?.slice(0, 4)} isLoading />
       </div>
     </div>
   );
