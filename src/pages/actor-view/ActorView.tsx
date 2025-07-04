@@ -12,7 +12,7 @@ const ActorView = () => {
 
   const { data } = getPersonSingle(id || "");
   const { data: imgData } = getPersonSimilar(id || "", "images");
-  const { data: movieData } = getPersonSimilar(id || "", "movie_credits");
+  const { data: movieData, isLoading } = getPersonSimilar(id || "", "movie_credits");
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center gap-15 mt-8">
@@ -119,7 +119,7 @@ const ActorView = () => {
           Movies they appeared in
         </h2>
 
-        <MovieView data={movieData?.cast?.slice(0, 4)} isLoading />
+        <MovieView data={movieData?.cast?.slice(0, 4)}  isLoading={isLoading || !data} />
       </div>
     </div>
   );

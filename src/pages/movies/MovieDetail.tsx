@@ -17,7 +17,7 @@ const MovieDetail = () => {
   const { getMovieSingle, getMovieDetail } = useMovie();
 
   const { data }: Props = getMovieSingle(id || "");
-  const { data: similarData } = getMovieDetail(id || "", "similar"); // o'xshash ma'lumotlar;
+  const { data: similarData, isLoading } = getMovieDetail(id || "", "similar"); // o'xshash ma'lumotlar;
   const { data: imagesData } = getMovieDetail(id || "", "images"); // kinodagi rasmlar;
   const { data: creditsData } = getMovieDetail(id || "", "credits"); // kinodagi aktyorlar;
 
@@ -224,7 +224,7 @@ const MovieDetail = () => {
             Similar Movies
           </h2>
 
-          <MovieView data={similarData?.results?.slice(0, 4)} isLoading />
+          <MovieView data={similarData?.results?.slice(0, 4)}  isLoading={isLoading || !data} />
         </div>
       </div>
     </div>
