@@ -6,6 +6,7 @@ import MovieView from "@/components/movie-view/MovieView";
 import type { MovieDetaill, Person } from "@/types";
 import Back from "@/assets/backline.svg";
 import Saved from "@/assets/bookmark-line.svg"; // Fill
+import React from "react";
 
 interface Props {
   data?: MovieDetaill;
@@ -27,7 +28,7 @@ const MovieDetail = () => {
   return (
     <div className="flex flex-col gap-8">
       <div className="relative w-full flex items-center justify-center">
-        <div className="w-[1360px] h-[640px] rounded-[12px] relative">
+        <div className="w-[1360px] h-[640px] rounded-[12px] relative mt-4">
           <img
             src={IMAGE_URL + data?.backdrop_path}
             alt=""
@@ -38,12 +39,12 @@ const MovieDetail = () => {
             onClick={() => navigate(-1)}
             src={Back}
             alt="Back"
-            className="absolute top-3 cursor-pointer left-3 dark:bg-[#111] opacity-80 rounded-[12px] p-4"
+            className="absolute top-3 cursor-pointer left-3 dark:bg-[#111] bg-slate-200 opacity-80 rounded-[12px] p-4"
           />
           <img
             src={Saved}
             alt="Back"
-            className="absolute top-3 right-3 cursor-pointer dark:bg-[#111] opacity-80 rounded-[12px] p-4"
+            className="absolute top-3 right-3 cursor-pointer dark:bg-[#111] bg-slate-200 opacity-80 rounded-[12px] p-4"
           />
         </div>
 
@@ -223,11 +224,11 @@ const MovieDetail = () => {
             Similar Movies
           </h2>
 
-          <MovieView data={similarData?.results?.slice(0, 4)} />
+          <MovieView data={similarData?.results?.slice(0, 4)} isLoading />
         </div>
       </div>
     </div>
   );
 };
 
-export default MovieDetail;
+export default React.memo(MovieDetail);
