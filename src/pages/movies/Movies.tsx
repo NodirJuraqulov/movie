@@ -22,7 +22,7 @@ const Movies = () => {
   };
 
   const { data: genreData } = getGenres();
-  const { data } = getMovies({
+  const { data, isLoading } = getMovies({
     page,
     with_genres: genre,
     without_genres: "18,36,27,10749",
@@ -34,7 +34,7 @@ const Movies = () => {
     <div>
       <Genre data={genreData?.genres} />
 
-      <MovieView data={data?.results} />
+      <MovieView data={data?.results} isLoading={isLoading} />
 
       <div className="mt-6 h-[60px] flex items-center justify-center">
         <Pagination
