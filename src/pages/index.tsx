@@ -8,6 +8,7 @@ const MovieDetail = lazy(() => import("./movies/MovieDetail"));
 const ActorView = lazy(() => import("./actor-view/ActorView"));
 const Saved = lazy(() => import("./saved/Saved"));
 const Search = lazy(() => import("./search/Search"));
+const NotFound = lazy(() => import("./not-found/NotFound"));
 
 const MainRouter = () => {
   return useRoutes([
@@ -40,6 +41,11 @@ const MainRouter = () => {
           element: <Search />,
         },
       ],
+    },
+
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
 };
