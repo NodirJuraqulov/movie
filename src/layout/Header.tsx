@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MainLogo from "@/assets/main-logo.svg";
 import DarkMode from "@/components/dark-mode/DarkMode";
@@ -38,6 +38,8 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const navigate = useNavigate()
+
   return (
     <header
       className={`w-full flex items-center justify-center shadow fixed top-0 inset-x-0 z-10 bg-white dark:bg-black transition-all duration-300 ease-in-out
@@ -76,7 +78,7 @@ const Header = () => {
         </button>
 
         <div className="flex items-center gap-5">
-          <button className="text-[16px] font-medium cursor-pointer line-clamp-1 text-white bg-[#C61F1F] lg:px-4 md:px-3 sm:px-2 px-1 py-1 rounded-[6px]">
+          <button onClick={() => navigate("/signin")} className="text-[16px] font-medium cursor-pointer line-clamp-1 text-white bg-[#C61F1F] lg:px-4 md:px-3 sm:px-2 px-1 py-1 rounded-[6px]">
             Sign in
           </button>
           <DarkMode />

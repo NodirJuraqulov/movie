@@ -2,7 +2,7 @@ import React from "react";
 
 const Skeleton = () => {
   return (
-    <div className="container mx-auto grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5">
+    <div className="w-full h-full container mx-auto grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5">
       {Array(8)
         // .fill()
         .map((_, index) => (

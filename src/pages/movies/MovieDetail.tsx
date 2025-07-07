@@ -7,19 +7,27 @@ import type { MovieDetaill, Person } from "@/types";
 import Back from "@/assets/backline.svg";
 import Saved from "@/assets/bookmark-line.svg"; // Fill
 import React from "react";
+import { Spin } from "antd";
 
 interface Props {
   data?: MovieDetaill;
+  isLoading: boolean;
 }
 
 const MovieDetail = () => {
   const { id } = useParams();
   const { getMovieSingle, getMovieDetail } = useMovie();
 
-  const { data }: Props = getMovieSingle(id || "");
+  const { data, isLoading: loading }: Props = getMovieSingle(id || "");
   const { data: similarData, isLoading } = getMovieDetail(id || "", "similar"); // o'xshash ma'lumotlar;
-  const { data: imagesData } = getMovieDetail(id || "", "images"); // kinodagi rasmlar;
-  const { data: creditsData } = getMovieDetail(id || "", "credits"); // kinodagi aktyorlar;
+  const { data: imagesData, isLoading: imgLoading } = getMovieDetail(
+    id || "",
+    "images"
+  ); // kinodagi rasmlar;
+  const { data: creditsData, isLoading: actorLoading } = getMovieDetail(
+    id || "",
+    "credits"
+  ); // kinodagi aktyorlar;
 
   console.log(creditsData?.cast);
 
@@ -29,11 +37,17 @@ const MovieDetail = () => {
     <div className="flex flex-col gap-8">
       <div className="relative w-full flex items-center justify-center">
         <div className="w-[1360px] h-[640px] rounded-[12px] relative mt-4">
-          <img
-            src={IMAGE_URL + data?.backdrop_path}
-            alt=""
-            className="w-[1360px] object-cover h-[640px] rounded-[12px]"
-          />
+          {loading ? (
+            <div className="w-full h-full bg-slate-200 dark:bg-[#111] text-4xl text-red-500 flex items-center justify-center">
+              <Spin tip="Yuklanmoqda..." size="large" />
+            </div>
+          ) : (
+            <img
+              src={IMAGE_URL + data?.backdrop_path}
+              alt=""
+              className="w-[1360px] object-cover h-[640px] rounded-[12px]"
+            />
+          )}
 
           <img
             onClick={() => navigate(-1)}
@@ -173,15 +187,26 @@ const MovieDetail = () => {
           </h2>
 
           <div className="flex gap-2 overflow-x-auto scroll-hidden">
-            {imagesData?.backdrops?.map((item: any, inx: number) => (
-              <Image
-                key={inx}
-                width={200}
-                src={IMAGE_URL + item.file_path}
-                rootClassName="shrink-0 mr-2"
-                className="rounded-md"
-              />
-            ))}
+            {imgLoading
+              ? Array(20)
+                  .fill()
+                  .map((_, index) => (
+                    <div
+                      key={index}
+                      className="animate-pulse rounded-lg w-full"
+                    >
+                      <div className="w-[200px] h-[120px] bg-slate-200 dark:bg-[#111] rounded-[12px]"></div>
+                    </div>
+                  ))
+              : imagesData?.backdrops?.map((item: any, inx: number) => (
+                  <Image
+                    key={inx}
+                    width={200}
+                    src={IMAGE_URL + item.file_path}
+                    rootClassName="shrink-0 mr-2"
+                    className="rounded-md"
+                  />
+                ))}
           </div>
         </div>
 
@@ -191,31 +216,42 @@ const MovieDetail = () => {
           </h2>
 
           <div className="flex gap-4 overflow-x-auto scroll-hidden">
-            {creditsData?.cast?.map((person: Person) => (
-              <div
-                key={person.id}
-                className="shrink-0 w-36 flex flex-col items-center rounded-lg bg-slate-200 dark:bg-[#222]/90 shadow dark:shadow-gray-700 p-2"
-              >
-                <img
-                  src={IMAGE_URL + person.profile_path}
-                  alt={person.original_name}
-                  onClick={() => navigate(`/person/${person.id}`)}
-                  className="w-full h-48 object-cover rounded-md cursor-pointer"
-                />
+            {actorLoading
+              ? Array(20)
+                  .fill()
+                  .map((_, index) => (
+                    <div
+                      key={index}
+                      className="animate-pulse rounded-lg w-full"
+                    >
+                      <div className="w-[150px] h-[250px] bg-slate-200 dark:bg-[#111] rounded-[12px]"></div>
+                    </div>
+                  ))
+              : creditsData?.cast?.map((person: Person) => (
+                  <div
+                    key={person.id}
+                    className="shrink-0 w-36 flex flex-col items-center rounded-lg bg-slate-200 dark:bg-[#222]/90 shadow dark:shadow-gray-700 p-2"
+                  >
+                    <img
+                      src={IMAGE_URL + person.profile_path}
+                      alt={person.original_name}
+                      onClick={() => navigate(`/person/${person.id}`)}
+                      className="w-full h-48 object-cover rounded-md cursor-pointer"
+                    />
 
-                <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100 text-center line-clamp-2">
-                  {person.original_name}
-                </h3>
+                    <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100 text-center line-clamp-2">
+                      {person.original_name}
+                    </h3>
 
-                <p className="text-xs text-gray-600 dark:text-gray-400 text-center line-clamp-2">
-                  {person.character}
-                </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 text-center line-clamp-2">
+                      {person.character}
+                    </p>
 
-                <span className="mt-1 inline-block rounded-full bg-[#B88E2F]/10 dark:bg-[#B88E2F]/30 text-[#B88E2F] px-2 py-0.5 text-[11px] font-semibold">
-                  ★ {person.popularity.toFixed(1)}
-                </span>
-              </div>
-            ))}
+                    <span className="mt-1 inline-block rounded-full bg-[#B88E2F]/10 dark:bg-[#B88E2F]/30 text-[#B88E2F] px-2 py-0.5 text-[11px] font-semibold">
+                      ★ {person.popularity.toFixed(1)}
+                    </span>
+                  </div>
+                ))}
           </div>
         </div>
 
@@ -224,7 +260,10 @@ const MovieDetail = () => {
             Similar Movies
           </h2>
 
-          <MovieView data={similarData?.results?.slice(0, 4)}  isLoading={isLoading || !data} />
+          <MovieView
+            data={similarData?.results?.slice(0, 4)}
+            isLoading={isLoading || !data}
+          />
         </div>
       </div>
     </div>

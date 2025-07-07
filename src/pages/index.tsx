@@ -9,6 +9,7 @@ const ActorView = lazy(() => import("./actor-view/ActorView"));
 const Saved = lazy(() => import("./saved/Saved"));
 const Search = lazy(() => import("./search/Search"));
 const NotFound = lazy(() => import("./not-found/NotFound"));
+const SignIn = lazy(() => import("./sign-in/SignIn"));
 
 const MainRouter = () => {
   return useRoutes([
@@ -39,6 +40,10 @@ const MainRouter = () => {
         {
           path: "/search",
           element: <Search />,
+        },
+        {
+          path: "/signin",
+          element: <SignIn />,
         },
       ],
     },
