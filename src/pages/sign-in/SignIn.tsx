@@ -3,10 +3,23 @@ import Facebook from "@/assets/faceboook.svg";
 import Google from "@/assets/google.svg";
 import { Form, Input } from "antd";
 import { PatternFormat } from "react-number-format";
+import { LeftOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full container mx-auto mt-12 relative flex items-center justify-center">
+      <div className="absolute top-0 left-0">
+        <button
+          className="bg-slate-200 dark:bg-[#111] w-16 h-16 rounded-[12px] cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
+          <LeftOutlined style={{ fontSize: 18, color: "red" }} />
+        </button>
+      </div>
+
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-[32px] leading-[38px] font-medium">Sign In</h2>
         <p className="text-[16px] leading-[24px] text-[#777777] mt-4 mb-8">
@@ -32,15 +45,27 @@ const SignIn = () => {
             ]}
           >
             <div className="relative">
-                <img src="https://flagcdn.com/w20/uz.png" alt="uzb-flag" className="absolute z-10 left-4 rounded-full w-6 h-6 top-1/2 -translate-y-1/2" />
+              <img
+                src="https://flagcdn.com/w20/uz.png"
+                alt="uzb-flag"
+                className="absolute z-10 left-4 rounded-full w-6 h-6 top-1/2 -translate-y-1/2"
+              />
 
-                <PatternFormat
+              <PatternFormat
                 format="+998 ## ### ## ##"
                 allowEmptyFormatting
                 mask="_"
                 customInput={Input}
-                style={{ backgroundColor: 'var(--card-bg)', border: "none", color: 'var(--card-text)', width: "380px", height: "64px", borderRadius: "12px", paddingLeft: "52px" }}
-                />
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  border: "none",
+                  color: "var(--card-text)",
+                  width: "380px",
+                  height: "64px",
+                  borderRadius: "12px",
+                  paddingLeft: "52px",
+                }}
+              />
             </div>
           </Form.Item>
 
