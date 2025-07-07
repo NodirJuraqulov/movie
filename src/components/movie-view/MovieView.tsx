@@ -38,7 +38,7 @@ const MovieView: FC<Props> = ({ data, isLoading }) => {
               className="dark:bg-[#111111] bg-slate-200 shadow rounded-lg"
               key={movie.id}
             >
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden rounded-t-lg">
                 <img
                   loading="lazy"
                   onClick={() => navigate(`/movie/${movie.id}`)}
