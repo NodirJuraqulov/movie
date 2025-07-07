@@ -34,3 +34,13 @@
 .scroll-hidden::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+:root {
+  --card-bg: #e2e8f0;   /* light: bg-slate-200  */
+  --card-text: #000000; /* light: qora matn     */
+}
+.dark {
+  --card-bg: #111111;   /* dark: #111           */
+  --card-text: #ffffff; /* dark: oq matn        */
+}
+
