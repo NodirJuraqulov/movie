@@ -189,7 +189,7 @@ const MovieDetail = () => {
           <div className="flex gap-2 overflow-x-auto scroll-hidden">
             {imgLoading
               ? Array(20)
-                  .fill()
+                  .fill(null)
                   .map((_, index) => (
                     <div
                       key={index}
@@ -218,7 +218,7 @@ const MovieDetail = () => {
           <div className="flex gap-4 overflow-x-auto scroll-hidden">
             {actorLoading
               ? Array(20)
-                  .fill()
+                  .fill(null)
                   .map((_, index) => (
                     <div
                       key={index}

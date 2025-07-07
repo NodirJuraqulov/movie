@@ -20,7 +20,7 @@ const MovieView: FC<Props> = ({ data, isLoading }) => {
     <div className="container mx-auto grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5">
       {isLoading
         ? Array(20)
-            .fill()
+            .fill(null)
             .map((_, index) => (
               <div
                 key={index}
